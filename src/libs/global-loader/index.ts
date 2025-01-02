@@ -1,15 +1,18 @@
-const { findTranslationPaths } = require("./findTranslationPaths");
-const { createLockFile } = require("./createLockFile");
+import { findTranslationPaths } from "./findTranslationPaths";
+import { createLockFile } from "./createLockFile";
+import { createContentDetailsFromFilePaths } from "./createContentDetailsFromFilePaths";
+import { shouldCreateTranslationFiles } from "./shouldCreateTranslationFiles";
+import { createTranslationFiles } from "./createTranslationFiles";
+import { createHookFile } from "./createHookFile";
+import { createIndexFile } from "./createIndexFile";
 
-const {
-  createContentDetailsFromFilePaths,
-} = require("./createContentDetailsFromFilePaths");
-const {
-  shouldCreateTranslationFiles,
-} = require("./shouldCreateTranslationFiles");
-const { createTranslationFiles } = require("./createTranslationFiles");
-const { createHookFile } = require("./createHookFile");
-const { createIndexFile } = require("./createIndexFile");
+interface Params {
+  rootDir: string,
+  destinationFolder: string,
+  languages: string[],
+  defaultLang: string,
+  alias?: (relativeImport: string) => string,
+}
 
 const createGlobalTranslations = ({
   rootDir,
@@ -17,7 +20,7 @@ const createGlobalTranslations = ({
   languages = [],
   defaultLang,
   alias,
-}) => {
+}: Params) => {
   if (rootDir === undefined) {
     console.log("rootDir must be a string");
     return;
@@ -55,13 +58,13 @@ const createGlobalTranslations = ({
   // const isDev = process.env.NODE_ENV === "development";
 };
 
-const configure = ({
+export const configure = ({
   rootDir,
   destinationFolder,
   languages = [],
   defaultLang,
   alias,
-}) => {
+}: Params) => {
   function loadTranslations() {
     return createGlobalTranslations({
       rootDir,
@@ -75,4 +78,4 @@ const configure = ({
   return { loadTranslations };
 };
 
-module.exports = { configure };
+

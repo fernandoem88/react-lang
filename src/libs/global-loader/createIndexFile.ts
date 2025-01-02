@@ -1,9 +1,10 @@
-const path = require("path");
+import path from "path";
+import { makeSureFileFolderExist } from "./makeSureFileFolderExist";
+import { writeFileSync } from "fs";
 
-const { makeSureFileFolderExist } = require("./makeSureFileFolderExist");
-const { writeFileSync } = require("fs");
+interface Params { defaultLang: string, destinationFolder: string }
 
-const createIndexFile = ({ defaultLang, destinationFolder }) => {
+export const createIndexFile = ({ defaultLang, destinationFolder }: Params) => {
   const defaultLangKey = defaultLang.replace("-", "_");
 
   const indexFileText = [
@@ -22,4 +23,3 @@ const createIndexFile = ({ defaultLang, destinationFolder }) => {
   writeFileSync(destination, indexFileText, "utf8");
 };
 
-module.exports = { createIndexFile };

@@ -1,14 +1,25 @@
-const { parseFileDetails } = require("./parseFileDetails");
+import { ContentDetails, parseFileDetails } from "./parseFileDetails";
 
-const createContentDetailsFromFilePaths = ({
+interface Params {
+  rootDir: string,
+  filePaths: string[],
+  defaultLang: string,
+  languages: string[],
+  destinationFolder: string,
+  alias?: (relativeImport: string) => string,
+}
+
+
+
+export const createContentDetailsFromFilePaths = ({
   rootDir,
   filePaths,
   defaultLang,
   languages,
   destinationFolder,
   alias,
-}) => {
-  const contents = { [defaultLang]: [] };
+}: Params) => {
+  const contents = { [defaultLang]: [] as ContentDetails[] };
 
   filePaths.forEach((file) => {
     const details = parseFileDetails({
@@ -33,4 +44,3 @@ const createContentDetailsFromFilePaths = ({
   return contents;
 };
 
-module.exports = { createContentDetailsFromFilePaths };

@@ -17,28 +17,18 @@ import type { JSX } from "react";
  * // will return
  * type Keywords = "restaurantId" | "tableId"
  */
-
-
-
 // prettier-ignore
 type GetStringKeywords<
   Text extends string,
   Open extends string = "{{",
   Close extends string = "}}",
   EndOfLine extends string = ""
-> = Concat<
-  Text,
-  EndOfLine
-> extends `${infer Sub1}${Open}${infer Keyword}${Close}${infer Sub2}`
-  ?
-  | Keyword
-  | GetStringKeywords<Sub1, Open, Close, EndOfLine>
-  | GetStringKeywords<Sub2, Open, Close, EndOfLine>
+> = Concat<Text, EndOfLine> extends `${infer Sub1}${Open}${infer Keyword}${Close}${infer Sub2}`
+  ? Keyword | GetStringKeywords<Sub1, Open, Close, EndOfLine> | GetStringKeywords<Sub2, Open, Close, EndOfLine>
   : never;
 
-type Concat<T1 extends string, T2 extends string> = T2 extends ""
-  ? T1
-  : `${T1}${T2}`;
+type Concat<T1 extends string, T2 extends string> =
+  T2 extends "" ? T1 : `${T1}${T2}`;
 
 
 

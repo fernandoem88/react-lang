@@ -1,9 +1,11 @@
-const { writeFileSync } = require("fs");
-const path = require("path");
+import { writeFileSync } from "fs";
+import path from "path";
 
-const LOCK_FILE = "translations-lock.js";
+export const LOCK_FILE = "translations-lock.js";
 
-const createLockFile = ({ rootDir, filePaths, languages, defaultLang }) => {
+interface Params { rootDir: string, filePaths: string[], languages: string[], defaultLang: string }
+
+export const createLockFile = ({ rootDir, filePaths, languages, defaultLang }: Params) => {
   const cleanPaths = filePaths
     .map((file) => {
       const pathWithNoRoot = path.relative(rootDir, file);
@@ -24,4 +26,3 @@ const createLockFile = ({ rootDir, filePaths, languages, defaultLang }) => {
   writeFileSync(LOCK_FILE, content, "utf8");
 };
 
-module.exports = { createLockFile, LOCK_FILE };

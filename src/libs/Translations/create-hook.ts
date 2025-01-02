@@ -6,7 +6,7 @@ import {
 } from './Provider';
 import { getStringReplacer } from '../getStringReplacer';
 import { getUniqId } from '../getUniqId';
-import type { GetStringReplacerArgs } from '../../types';
+import { GetStringReplacerArgs } from '../../types';
 
 const replacer = getStringReplacer('{{ ', ' }}');
 

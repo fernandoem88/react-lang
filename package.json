@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "rollup -c",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -28,7 +28,7 @@
     }
   },
   "prettier": {
-    "printWidth": 150,
+    "printWidth": 80,
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
@@ -53,9 +53,13 @@
     "husky": "^9.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "rollup": "^4.29.1",
+    "rollup-plugin-typescript2": "^0.36.0",
     "size-limit": "^11.1.6",
     "tsdx": "^0.14.1",
     "tslib": "^2.8.1",
     "typescript": "^5.7.2"
-  }
+  },
+  "types": "dist/index.d.ts",
+  "type": "module"
 }

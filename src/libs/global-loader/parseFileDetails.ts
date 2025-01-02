@@ -1,15 +1,16 @@
-const { readFileSync } = require("fs");
-const path = require("path");
-const uniqid = require("uniqid");
+import { getUniqId } from "../getUniqId";
 
-const getLangFromFile = (file) => {
+import { readFileSync } from "fs";
+import path from "path";
+
+
+const getLangFromFile = (file: string) => {
   return file
     .split("/")
-    .pop()
-    .replace(/(\.ts|\.js)$/, "");
+    .pop()?.replace(/(\.ts|\.js)$/, "") ?? "";
 };
 
-const getFileContext = (file) => {
+const getFileContext = (file: string) => {
   const translations = readFileSync(file, { encoding: "utf-8" });
   const context = translations
     .split("\n")
@@ -20,12 +21,19 @@ const getFileContext = (file) => {
   return context;
 };
 
+interface Params {
+  rootDir: string,
+  file: string,
+  destinationFolder: string,
+  alias?: (relativeImport: string) => string,
+}
+
 const getRelativePathToDestinationFolder = ({
   rootDir,
   file,
   destinationFolder,
-  alias = "",
-}) => {
+  alias,
+}: Params) => {
   if (alias) {
     const relativeToRoot = path
       .relative(rootDir, file)
@@ -41,18 +49,25 @@ const getRelativePathToDestinationFolder = ({
   return relativePath.replace(/(\.ts|\.js)$/, "");
 };
 
-const parseFileDetails = ({
+export interface ContentDetails {
+  lang: string;
+  relativePath: string;
+  key: string;
+  context: string | undefined;
+}
+
+export const parseFileDetails = ({
   rootDir,
   file,
   destinationFolder,
   languages,
   alias,
-}) => {
+}: Params & { languages: string[] }): ContentDetails | null => {
   const lang = getLangFromFile(file);
 
-  if (!languages.includes(lang)) return;
+  if (!languages.includes(lang)) return null;
 
-  const id = uniqid().replace("-", "_");
+  const id = getUniqId("_").replace("-", "_");
   const relativePath = getRelativePathToDestinationFolder({
     rootDir,
     file,
@@ -69,4 +84,3 @@ const parseFileDetails = ({
   return item;
 };
 
-module.exports = { parseFileDetails };

@@ -1,5 +1,5 @@
-const { readdirSync } = require("fs");
-const path = require("path");
+import { readdirSync } from "fs";
+import path from "path";
 
 /**
  * Recursively find all root folder paths named "__trans__".
@@ -10,8 +10,8 @@ const path = require("path");
  * const transFolders = findTransFolders(projectDir);
  * console.log("translation root folders:", transFolders);
  */
-function findTranslationPaths(dirname) {
-  let results = [];
+export function findTranslationPaths(dirname: string): string[] {
+  let results: string[] = [];
 
   // Read the contents of the current directory
   const list = readdirSync(dirname, { withFileTypes: true });
@@ -32,4 +32,3 @@ function findTranslationPaths(dirname) {
   return results;
 }
 
-module.exports = { findTranslationPaths };

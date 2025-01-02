@@ -1,11 +1,12 @@
-const path = require("path");
-const { writeFileSync } = require("fs");
-const {
-  createFileTextFromContentEntries,
-} = require("./createFileTextFromContentEntries");
-const { makeSureFileFolderExist } = require("./makeSureFileFolderExist");
+import { ContentDetails } from "./parseFileDetails";
+import path from "path";
+import { writeFileSync } from "fs";
+import { createFileTextFromContentEntries } from "./createFileTextFromContentEntries";
+import { makeSureFileFolderExist } from "./makeSureFileFolderExist";
 
-const createTranslationFiles = ({ contents, destinationFolder }) => {
+interface Params { contents: Record<string, ContentDetails[]>, destinationFolder: string }
+
+export const createTranslationFiles = ({ contents, destinationFolder }: Params) => {
   const parsedContentEntries = Object.entries(contents).map((entry) => {
     const [lang, contentEntries] = entry;
     return {
@@ -21,4 +22,3 @@ const createTranslationFiles = ({ contents, destinationFolder }) => {
   });
 };
 
-module.exports = { createTranslationFiles };

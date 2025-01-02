@@ -1,13 +1,20 @@
-const path = require("path");
-const { existsSync } = require("fs");
-const { LOCK_FILE } = require("./createLockFile");
+import path from "path";
+import { existsSync } from "fs";
+import { LOCK_FILE } from "./createLockFile";
 
-const shouldCreateTranslationFiles = ({
+interface Params {
+  rootDir: string,
+  filePaths: string[],
+  defaultLang: string,
+  languages: string[],
+}
+
+export const shouldCreateTranslationFiles = ({
   rootDir,
   filePaths,
   defaultLang,
   languages,
-}) => {
+}: Params) => {
   const relativeLockFile = path.resolve(rootDir, LOCK_FILE);
   if (!existsSync(relativeLockFile)) return true;
 
@@ -29,4 +36,3 @@ const shouldCreateTranslationFiles = ({
   return hasSomeDiff;
 };
 
-module.exports = { shouldCreateTranslationFiles };
