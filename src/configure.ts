@@ -1,0 +1,1 @@
+export { configure } from './libs/global-loader';

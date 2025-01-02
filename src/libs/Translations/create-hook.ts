@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import {
-  ReactLangTypes,
+  type AppLang,
   useSetTranslationsContext,
   useTranslationsContext,
 } from './Provider';
@@ -10,13 +10,15 @@ import { GetStringReplacerArgs } from '../../types';
 
 const replacer = getStringReplacer('{{ ', ' }}');
 
+
+
 export const createHook = <T extends Record<string, string>>(
   injectedTranslations: T | null,
-  getTranslations: (en: ReactLangTypes['lang']) => Promise<{ default: T }>,
+  getTranslations: (en: AppLang) => Promise<{ default: T }>,
   options?: { isGlobal: boolean }
 ) => {
   const key = getUniqId(options?.isGlobal ? 'global-trans-' : 'partial-trans-');
-  const useTrans = (lang: ReactLangTypes['lang']) => {
+  const useTrans = (lang: AppLang) => {
     const ctx = useTranslationsContext();
     const nthContext = ctx[key] ?? {};
     const defaultTrans = (injectedTranslations || ctx.__GLOBAL__ || {}) as T;

@@ -12,20 +12,23 @@ interface Props {
   children: ReactNode;
 }
 
-export interface ReactLangTypes {
-  lang: 'en';
+
+export interface AppTypes {
+  // tobe augmented with Lang: "en" | "it"
 }
+
+export type AppLang = AppTypes extends { lang: infer R } ? R : ""
 
 type TranslationContext = {
   __GLOBAL__: { [translationKey: string]: string };
   [contextId: string]: Partial<
-    Record<ReactLangTypes['lang'], { [translationKey: string]: string }>
+    Record<AppLang, { [translationKey: string]: string }>
   >;
 };
 
 const ctx = createContext<TranslationContext>({ __GLOBAL__: {} });
 const setCtx = createContext<Dispatch<SetStateAction<TranslationContext>>>(
-  () => {}
+  () => { }
 );
 
 export const useTranslationsContext = () => useContext(ctx);

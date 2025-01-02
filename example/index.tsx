@@ -1,14 +1,31 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Thing } from '../.';
+import { TranslationsProvider, AppLang } from '../.';
+import { useTranslations } from './__trans__/useTranslations';
+
+declare module "../." {
+  export interface AppTypes {
+    lang: "en" | "it" | "nl"
+  }
+}
+
 
 const App = () => {
   return (
-    <div>
-      <Thing />
-    </div>
+    <TranslationsProvider>
+      <Header />
+    </TranslationsProvider>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Header = () => {
+  const [lang, setLang] = React.useState<AppLang>("en")
+  const t = useTranslations(lang)
+
+  const countryElement = <strong>{t("country.italy")}</strong>
+  return <header>
+    {t("header.label.hello", { country: countryElement })}
+  </header>
+}
+
+// ReactDOM.render(<App />, document.getElementById('root'));
