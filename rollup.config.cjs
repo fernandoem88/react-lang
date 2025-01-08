@@ -1,5 +1,18 @@
 const typescript = require("rollup-plugin-typescript2");
 
+/*
+"size-limit": [
+  {
+    "path": "dist/react-lang.cjs.production.min.js",
+    "limit": "10 KB"
+  },
+  {
+    "path": "dist/react-lang.esm.js",
+    "limit": "10 KB"
+  }
+]
+*/
+
 module.exports = {
   input: {
     index: 'src/index.ts',  // Entry for the index library
