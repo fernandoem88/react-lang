@@ -194,9 +194,11 @@ export const Header = () => {
 ![lang auto complete](./assets/lang-auto-complete.png)
 
 - keys auto complete
+
 ![keys auto complete](./assets/keys-auto-complete.png)
 
 - missing value lint error
+
 ![missing value lint error](./assets/lint-error.png)
 
 ---
