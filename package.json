@@ -64,12 +64,12 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs.js",
+      "require": "./dist/index.cjs",
       "import": "./dist/index.esm.js"
     },
     "./configure": {
       "types": "./dist/configure.d.ts",
-      "require": "./dist/configure.cjs.js",
+      "require": "./dist/configure.cjs",
       "import": "./dist/configure.esm.js"
     }
   }

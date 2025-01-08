@@ -16,7 +16,7 @@ module.exports = {
       dir: 'dist',
       format: 'cjs',
       sourcemap: true,
-      entryFileNames: '[name].cjs.js', // Separate output for CommonJS
+      entryFileNames: '[name].cjs', // Separate output for CommonJS
     }
   ],
   plugins: [typescript({

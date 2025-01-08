@@ -1,4 +1,4 @@
-import React, { Fragment, JSX } from "react";
+import { createElement, Fragment, type ReactElement } from "react";
 import type { GetStringReplacerArgs } from "../types";
 
 
@@ -38,7 +38,7 @@ function mapJsxElements(params: {
   start: string;
   end: string;
   template: string;
-  replacements: Record<string, string | number | JSX.Element>;
+  replacements: Record<string, string | number | ReactElement>;
 }) {
   const { end, replacements, start, template } = params;
   const specialChar = ["{", "}", "[", "]", ".", "|", "/", "$"];
@@ -72,12 +72,12 @@ function mapJsxElements(params: {
       const key = match[1].trim();
       // return <Fragment key={index}>{replacements[key] || part}</Fragment>; // Replace or fallback to the original part.
 
-      return React.createElement(Fragment, {children: replacements[key] || part, key: index})
+      return createElement(Fragment, { children: replacements[key] || part, key: index })
     }
     // return <Fragment key={index}>{part}</Fragment>; // Non-placeholder text remains unchanged.
-    return React.createElement(Fragment, {children:  part, key: index})
+    return createElement(Fragment, { children: part, key: index })
   });
 
   // return <>{elements}</>;
-  return React.createElement(Fragment, {children: elements})
+  return createElement(Fragment, { children: elements })
 }

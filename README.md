@@ -121,9 +121,9 @@ To use translations globally across multiple components, configure a global `use
 Set up the global context during project initialization. For example, in a **Next.js** project, configure it in `next.config.js`:
 
 ```js
-const reactLang = require("react-lang");
+const { configure: configureReactLang } = require("react-lang/configure");
 
-const context = reactLang.configure({
+const context = configureReactLang({
   defaultLang: "en",
   rootDir: __dirname,
   destinationFolder: "src/translations", // Folder to store combined translations
