@@ -63,5 +63,19 @@
       "require": "./dist/configure.cjs",
       "import": "./dist/configure.js"
     }
-  }
+  },
+  "keywords": [
+    "react",
+    "translation",
+    "react-lang",
+    "i18n"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandoem88/react-lang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fernandoem88/react-lang/issues"
+  },
+  "homepage": "https://github.com/fernandoem88/react-lang#readme"
 }
