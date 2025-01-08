@@ -191,7 +191,7 @@ export const Header = () => {
 
 - lang auto complete
 
-![lang auto complete](./assets/lang-complete.png)
+![lang auto complete](./assets/lang-auto-complete.png)
 
 - keys auto complete
 ![keys auto complete](./assets/keys-auto-complete.png)
