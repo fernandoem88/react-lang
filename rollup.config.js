@@ -42,5 +42,5 @@ export default {
     tsconfig: './tsconfig.json',
     clean: true, // Clear cache
   })],
-  external: ["react"], // Prevent bundling React
+  external: ["react", "fs", "path"], // Prevent bundling React
 };
