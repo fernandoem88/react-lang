@@ -1,5 +1,5 @@
 
-import type { JSX } from "react";
+import type { ReactElement } from "react";
 
 /**
  * @description return keywords from the given string
@@ -44,7 +44,7 @@ export type GetStringReplacerArgs<
   : [
     keys: Record<
       GetStringKeywords<T, Start, End, EndOfLine>,
-      string | number | JSX.Element
+      string | number | ReactElement
     >
   ];
 

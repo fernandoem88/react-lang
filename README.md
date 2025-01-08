@@ -1,5 +1,9 @@
 
-# **react-lingala: A Fully Typed Translation Library for React**
+# A Fully Typed Translation Library for React**
+
+![lang auto complete](./assets/auto-complete-1.png)
+![keys auto complete](./assets/auto-complete-2.png)
+![missing value lint error](./assets/lint-error.png)
 
 ## **Introduction**
 
@@ -11,7 +15,7 @@
 
 ### **1. Define Your Language Set**
 
-Use TypeScript declaration augmentation to define your application's language set. Create a definition file, e.g., `__types.d.ts`:
+Use TypeScript declaration augmentation to define your application's language set. Create a definition file, e.g., `./types.d.ts`:
 
 ```ts
 declare module "react-lingala" {
@@ -82,7 +86,7 @@ export const Header = () => {
   return (
     <header>
       <label>{t("header.label.title")}</label>
-      <p>{t("header.text.hello-you", { name: "Fernando" })}</p>
+      <p>{t("header.text.hello-you", { name: "Fernando Ekutsu Mondele" })}</p>
       <YourCustomLanguageSelector lang={lang} onChange={(newLang) => setLang(newLang)} />
     </header>
   );
@@ -121,9 +125,9 @@ To use translations globally across multiple components, configure a global `use
 Set up the global context during project initialization. For example, in a **Next.js** project, configure it in `next.config.js`:
 
 ```js
-const { configure: configureReactLang } = require("react-lingala/configure");
+const lingala = require("react-lingala/configure");
 
-const context = configureReactLang({
+const context = lingala.configure({
   defaultLang: "en",
   rootDir: __dirname,
   destinationFolder: "src/translations", // Folder to store combined translations
@@ -176,10 +180,12 @@ export const Header = () => {
   const [lang, setLang] = useState<AppLang>("en");
   const t = useTranslations(lang);
 
+  const NameElement = <strong>Fernando Ekutsu Mondele</strong>
+
   return (
     <header>
       <label>{t("header.label.title")}</label>
-      <p>{t("header.text.hello-you", { name: "Fernando" })}</p>
+      <p>{t("header.text.hello-you", { name: NameElement })}</p>
       <YourCustomLanguageSelector lang={lang} onChange={(newLang) => setLang(newLang)} />
     </header>
   );
