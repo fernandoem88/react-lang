@@ -53,15 +53,15 @@
     "uuid": "^11.0.4"
   },
   "exports": {
-    "./configure": {
-      "types": "./dist/configure.d.ts",
-      "require": "./dist/configure.cjs",
-      "import": "./dist/configure.esm.js"
-    },
     ".": {
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.esm.js"
+      "import": "./dist/index.js"
+    },
+    "./configure": {
+      "types": "./dist/configure.d.ts",
+      "require": "./dist/configure.cjs",
+      "import": "./dist/configure.js"
     }
   }
 }
