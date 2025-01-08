@@ -5,10 +5,20 @@ import {
   useTranslationsContext,
 } from './Provider';
 import { getStringReplacer } from '../getStringReplacer';
-import { getUniqId } from '../getUniqId';
+
 import { GetStringReplacerArgs } from '../../types';
 
 const replacer = getStringReplacer('{{ ', ' }}');
+
+const ID_GENERATOR = {
+  id: 1
+}
+
+const getUniqId = (key: string) => {
+  const index = ID_GENERATOR.id
+  ID_GENERATOR.id += 1
+  return key + index
+}
 
 
 

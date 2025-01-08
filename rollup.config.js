@@ -23,5 +23,5 @@ module.exports = {
     tsconfig: './tsconfig.json',
     clean: true, // Clear cache
   })],
-  external: ["react", "fs", "path", "uuid"], // Prevent bundling React
+  external: ["react", "fs", "path"], // Prevent bundling React
 };

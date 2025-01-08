@@ -1,5 +1,3 @@
-import { getUniqId } from "../getUniqId";
-
 import { readFileSync } from "fs";
 import path from "path";
 
@@ -22,6 +20,7 @@ const getFileContext = (file: string) => {
 };
 
 interface Params {
+
   rootDir: string,
   file: string,
   destinationFolder: string,
@@ -54,6 +53,7 @@ export interface ContentDetails {
   relativePath: string;
   key: string;
   context: string | undefined;
+
 }
 
 export const parseFileDetails = ({
@@ -62,12 +62,13 @@ export const parseFileDetails = ({
   destinationFolder,
   languages,
   alias,
-}: Params & { languages: string[] }): ContentDetails | null => {
+  index
+}: Params & { index: number, languages: string[] }): ContentDetails | null => {
   const lang = getLangFromFile(file);
 
   if (!languages.includes(lang)) return null;
 
-  const id = getUniqId("_").replace("-", "_");
+  // const id = getUniqId("_");
   const relativePath = getRelativePathToDestinationFolder({
     rootDir,
     file,
@@ -77,7 +78,7 @@ export const parseFileDetails = ({
 
   const context = getFileContext(file);
 
-  const key = lang.replaceAll("-", "_") + id;
+  const key = lang.replaceAll("-", "_") + index;
 
   const item = { lang, relativePath, key, context };
 

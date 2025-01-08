@@ -21,13 +21,14 @@ export const createContentDetailsFromFilePaths = ({
 }: Params) => {
   const contents = { [defaultLang]: [] as ContentDetails[] };
 
-  filePaths.forEach((file) => {
+  filePaths.forEach((file, index) => {
     const details = parseFileDetails({
       rootDir,
       file,
       languages,
       destinationFolder,
       alias,
+      index
     });
 
     if (!details) {
