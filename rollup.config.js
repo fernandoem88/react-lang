@@ -22,7 +22,7 @@ const index = {
     tsconfig: './tsconfig.json',
     clean: true, // Clear cache
   })],
-  external: ["react", "fs", "path"], // Prevent bundling React
+  external: ["react", "fs", "path", "uuid"], // Prevent bundling React
 }
 
 const configure = {
@@ -42,7 +42,7 @@ const configure = {
     tsconfig: './tsconfig.json',
     clean: true, // Clear cache
   })],
-  external: ["react", "fs", "path"], // Prevent bundling React
+  external: ["react", "fs", "path", "uuid"], // Prevent bundling React
 }
 
 export default [
@@ -83,5 +83,5 @@ export default [
 //     tsconfig: './tsconfig.json',
 //     clean: true, // Clear cache
 //   })],
-//   external: ["react", "fs", "path"], // Prevent bundling React
+//   external: ["react", "fs", "path", "uuid"], // Prevent bundling React
 // };

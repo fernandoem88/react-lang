@@ -62,13 +62,18 @@
   },
   "types": "dist/index.d.ts",
   "exports": {
-    "./index": {
+    ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.esm.js"
     },
     "./configure": {
       "types": "./dist/configure.d.ts",
-      "default": "./dist/configure.cjs.js"
+      "require": "./dist/configure.cjs.js",
+      "import": "./dist/configure.esm.js"
     }
+  },
+  "dependencies": {
+    "uuid": "^11.0.4"
   }
 }
