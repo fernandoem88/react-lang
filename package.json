@@ -1,5 +1,5 @@
 {
-  "version": "0.1.7",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",
@@ -35,7 +35,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-lang",
+  "name": "react-lingala",
   "author": "Fernando Ekutsu Mondele",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.1.6",
@@ -67,15 +67,15 @@
   "keywords": [
     "react",
     "translation",
-    "react-lang",
+    "react-lingala",
     "i18n"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fernandoem88/react-lang.git"
+    "url": "git+https://github.com/fernandoem88/react-lingala.git"
   },
   "bugs": {
-    "url": "https://github.com/fernandoem88/react-lang/issues"
+    "url": "https://github.com/fernandoem88/react-lingala/issues"
   },
-  "homepage": "https://github.com/fernandoem88/react-lang#readme"
+  "homepage": "https://github.com/fernandoem88/react-lingala#readme"
 }

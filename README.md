@@ -1,9 +1,9 @@
 
-# **React-Lang: A Fully Typed Translation Library for React**
+# **react-lingala: A Fully Typed Translation Library for React**
 
 ## **Introduction**
 
-`react-lang` is a fully typed React library designed to simplify translations in your React applications. With strong TypeScript support, this library ensures type safety, scalability, and ease of use.
+`react-lingala` is a fully typed React library designed to simplify translations in your React applications. With strong TypeScript support, this library ensures type safety, scalability, and ease of use.
 
 ---
 
@@ -14,7 +14,7 @@
 Use TypeScript declaration augmentation to define your application's language set. Create a definition file, e.g., `__types.d.ts`:
 
 ```ts
-declare module "react-lang" {
+declare module "react-lingala" {
   export interface AppTypes {
     lang: "en" | "fr" | "it"; // Add your preferred languages here
   }
@@ -56,7 +56,7 @@ Organize your translations in a dedicated folder, e.g., `__trans__/`. Each file 
 Define a custom hook to manage your local translations, e.g., `useMyTranslations.ts`:
 
 ```ts
-import { createHook } from "react-lang";
+import { createHook } from "react-lingala";
 import en from "./__trans__/en";
 
 // `en` will be the default translation dictionary
@@ -71,7 +71,7 @@ Here’s how to use the translations in your components:
 
 ```tsx
 import { useState } from "react";
-import { type AppLang } from "react-lang";
+import { type AppLang } from "react-lingala";
 
 import { useMyTranslations } from "./useMyTranslations";
 
@@ -96,7 +96,7 @@ export const Header = () => {
 Wrap your application in a `TranslationsProvider` to provide context for translations.
 
 ```tsx
-import { TranslationsProvider } from "react-lang";
+import { TranslationsProvider } from "react-lingala";
 import { Header } from "./Header";
 
 export const Root = () => {
@@ -121,7 +121,7 @@ To use translations globally across multiple components, configure a global `use
 Set up the global context during project initialization. For example, in a **Next.js** project, configure it in `next.config.js`:
 
 ```js
-const { configure: configureReactLang } = require("react-lang/configure");
+const { configure: configureReactLang } = require("react-lingala/configure");
 
 const context = configureReactLang({
   defaultLang: "en",
@@ -148,7 +148,7 @@ module.exports = {
 Use the global translations provider to inject the default translations into your application:
 
 ```tsx
-import { TranslationsProvider } from "react-lang";
+import { TranslationsProvider } from "react-lingala";
 import { Header } from "./Header";
 import { DEFAULT_TRANSLATIONS } from "./src/translations/global";
 
@@ -169,7 +169,7 @@ You can now replace the local translation hook (`useMyTranslations`) with the gl
 
 ```tsx
 import { useState } from "react";
-import { type AppLang } from "react-lang";
+import { type AppLang } from "react-lingala";
 import { useTranslations } from "./src/translations"; // Use the global hook
 
 export const Header = () => {
