@@ -23,6 +23,7 @@ const Header = () => {
   const t = useTranslations(lang)
 
   const countryElement = <strong>{t("country.italy")}</strong>
+  
   return <header>
     {t("header.label.hello", { country: countryElement })}
   </header>

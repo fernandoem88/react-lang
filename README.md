@@ -1,156 +1,213 @@
-# TSDX React User Guide
+# Introduction
 
-react Lang  first commit
+this is a fully typed react library for translations.
 
-## Commands
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
+# Local Usage
 
-The recommended workflow is to run TSDX in one terminal:
+first of all, define your languages set type by using the typescript augmentation approach in a  definition file eg: __types.d.ts__
 
-```bash
-npm start # or yarn start
-```
-
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
-
-Then run the example inside another:
-
-```bash
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
-```
-
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
-
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle analysis
-
-Calculates the real cost of your library using [size-limit](https://github.com/ai/size-limit) with `npm run size` and visulize it with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/example
-  index.html
-  index.tsx       # test your component here in a demo app
-  package.json
-  tsconfig.json
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-#### React Testing Library
-
-We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+```ts
+declare module "react-lang" {
+  export interface AppTypes {
+    lang: "en" | "fr" | "it" // add whatever you want
+  }
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+Define a folder where to put your translations _\_\_trans\_\__
 
-## Module Formats
+- _/en.ts_
 
-CJS, ESModules, and UMD module formats are supported.
-
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
-
-## Deploying the Example Playground
-
-The Playground is just a simple [Parcel](https://parceljs.org) app, you can deploy it anywhere you would normally deploy that. Here are some guidelines for **manually** deploying with the Netlify CLI (`npm i -g netlify-cli`):
-
-```bash
-cd example # if not already in the example folder
-npm run build # builds to dist
-netlify deploy # deploy the dist folder
+```ts
+// export it as const to ensure the types
+// this will be the translations set for en (English)
+export default {
+  "header.label.title": "Introduction To This Library",
+  // any keyword should be defined within a double curly-brackets {{ keyword }}
+  "header.text.hello-you": "Hello, my name is {{ name }}",
+} as const
 ```
 
-Alternatively, if you already have a git repo connected, you can set up continuous deployment with Netlify:
+you can define other translations at the same way for _fr_, _it_, etc.
+Note:  this is not mandatory. 
 
-```bash
-netlify init
-# build command: yarn build && cd example && yarn && yarn build
-# directory to deploy: example/dist
-# pick yes for netlify.toml
+- _/fr.ts_
+```ts
+// for french
+export default {
+  "header.label.title": "Introduction à cette librairie.",
+  "header.text.hello-you": "Bonjour, je m'appelle {{ name }}",
+} as const
 ```
 
-## Named Exports
+- _/it.ts_
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
-
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
-
-## Usage with Lerna
-
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
-
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
-
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
-
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
+```ts
+// for italian
+export default {
+  "header.label.title": "Introduzione alla libreria.",
+  "header.text.hello-you": "Buongiorno, mi chiamo {{ name }}",
+} as const
 ```
 
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+
+
+now define the local hook to use for translation: _useMyTranslations.ts_
+
+```ts
+import { createHook } from "react-lang"
+import en from "./__trans__/en"
+
+// en will be used as the default translations dictionary.
+
+export const useMyTranslations = createHook(en, (lang) => import(`./__trans__/${lang}`))
+```
+
+## Component With Translations
+
+let's define now a component that will consume the defined translations
+
+```tsx
+import { useState } from "react"
+import { type AppLang } from 'react-lang';
+
+import { useMyTranslations } from "./useMyTranslations"
+
+export const Header = () => {
+  const [lang, setLang] = useState<AppLang>("en")
+  const t = useMyTranslations(lang)
+
+  const countryElement = <strong>{t("country.italy")}</strong>
+
+  const StrongName = <strong>Fernando Ekutsu Mondele</strong>
+  
+  return (
+    <header>
+      <label>
+        {t("header.label.title")}
+      </label>
+      <p>{t("header.text.hello-you", { name: MyName })}</p>
+      <YourCustomLanguageSelector lang={lang} onChange={lang => setLang(lang)}/>
+    </header>
+  )
+}
+
+```
+
+
+
+# Provider
+
+the translations provider must be set in order to access the context
+
+```tsx
+import { TranslationsProvider } from 'react-lang';
+import { Header } from "./Header"
+
+export const Root = () => {
+  return (
+    <TranslationsProvider>
+      <Header />
+    </TranslationsProvider>
+  )
+}
+```
+
+
+# Global Usage
+
+now let's say, we have 2 components with common translations, instead of defining useTRanslation1 and useTranslation2, we can define directly a global translation hook to use every where in the project.
+
+
+
+## Configuration
+
+in order to have a global _useTranslations_ hook, we need to configure the context when building the project, for eg in a _Nextjs_ project, it should be implemented in _next.config.js_.
+
+```js
+
+const { configure: configureReactLang } = require("react-lang")
+
+const transContext = configureReactLang({
+  defaultLang: "en",
+  rootDir: __dirname,
+  // the folder where the translations will be combined
+  destinationFolder: "src/translations",
+  languages: [ "de", "en", "es", "fr", "it"], // whatever you want
+  // optional alias in order to convert
+  alias: (file) => `@/${file.replace(/^src\//, "")}`,
+});
+
+// this will check up all __trans__ folders and import the translations
+// after running this, a translations-lock.js file will be created at the root folder.
+// the translations-lock.js is used to not generate a new translations folder every time we build the project.
+// ps: re-start the project every time there is a new translation file so it can be added in the global context.
+transContext.loadTranslations();
+
+...
+
+module.exports = // your nextjs config
+
+```
+
+## Global Provider
+
+
+now the default translations should injected true the Provider
+
+```tsx
+import { TranslationsProvider } from 'react-lang';
+import { Header } from "./Header"
+// the default translations can be imported in server side once to not import it in client side every time
+// src/translations is the provided folder path at the configuration
+import { DEFAULT_TRANSLATIONS } from "./src/translations/global"
+
+export const Root = () => {
+  return (
+    <TranslationsProvider defaultTranslations={DEFAULT_TRANSLATIONS}>
+      <Header />
+    </TranslationsProvider>
+  )
+}
+```
+
+##  useTRansltions
+
+now you can delete the _useMyTranslations_ hook file and replace it with the global hook from the specified translations folder _src/translations_
+
+```tsx
+import { useState } from "react"
+import { type AppLang } from 'react-lang';
+
+// import { useMyTranslations } from "./useMyTranslations" // deleted
+import { useTranslations } from "./src/translations" // +++
+
+export const Header = () => {
+  const [lang, setLang] = useState<AppLang>("en")
+  // const t = useMyTranslations(lang)
+  const t = useTranslations(lang) // +++
+
+  const countryElement = <strong>{t("country.italy")}</strong>
+
+  const StrongName = <strong>Fernando Ekutsu Mondele</strong>
+  
+  return (
+    <header>
+      <label>
+        {t("header.label.title")}
+      </label>
+      <p>{t("header.text.hello-you", { name: MyName })}</p>
+      <YourCustomLanguageSelector lang={lang} onChange={lang => setLang(lang)}/>
+    </header>
+  )
+}
+```
+
+
+
+
+
+
+
+
